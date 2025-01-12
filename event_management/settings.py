@@ -66,8 +66,11 @@ WSGI_APPLICATION = 'event_management.wsgi.application'
 
 import dj_database_url
 
-DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+DATABASES = { 'default': dj_database_url.config(
+        default='sqlite:///db.sqlite3',  # Fallback to SQLite
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
 
 # Password validation
